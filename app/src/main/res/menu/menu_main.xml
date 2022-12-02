@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionMainMenuExit"
+        app:showAsAction="always"
+        android:title="@string/main_menu_item_exit"
+        android:icon="@drawable/ic_exit"/>
+</menu>
