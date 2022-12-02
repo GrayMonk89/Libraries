@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Popular Libraries</string>
+    <string name="main_activity_first_button">First Button</string>
+    <string name="main_activity_second_button">Second Button</string>
+    <string name="main_activity_third_button">Third Button</string>
+    <string name="exit">Exit</string>
 </resources>
