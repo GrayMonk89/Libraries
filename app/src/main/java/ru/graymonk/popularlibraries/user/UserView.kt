@@ -1,4 +1,4 @@
-package ru.graymonk.popularlibraries
+package ru.graymonk.popularlibraries.user
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
@@ -6,8 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 import ru.graymonk.popularlibraries.model.GithubUser
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface MainView : MvpView {
+interface UserView : MvpView {
     fun initList(list: List<GithubUser>)
-
-    //fun updateList(list: List<GitHubUser>)
 }
