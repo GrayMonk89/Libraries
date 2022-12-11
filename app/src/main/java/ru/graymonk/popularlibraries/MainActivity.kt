@@ -3,24 +3,22 @@ package ru.graymonk.popularlibraries
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 import ru.graymonk.popularlibraries.databinding.ActivityMainBinding
-import ru.graymonk.popularlibraries.utils.Constants
 import kotlin.system.exitProcess
 
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var presenter: CountersPresenter
+    private val presenter by moxyPresenter { CountersPresenter(CountersModel()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        initPresenter()
 
         setClickListener()
     }
@@ -28,36 +26,27 @@ class MainActivity : AppCompatActivity(), MainView {
     private fun setClickListener() {
         with(binding) {
             mainActivityFirstButton.setOnClickListener {
-                presenter.onCounterClick(Constants.DEFAULT_VALUE_ZERO)
+                presenter.onCounterOneClick()
             }
             mainActivitySecondButton.setOnClickListener {
-                presenter.onCounterClick(Constants.DEFAULT_VALUE_ONE)
+                presenter.onCounterTwoClick()
             }
             mainActivityThirdButton.setOnClickListener {
-                presenter.onCounterClick(Constants.DEFAULT_VALUE_TWO)
+                presenter.onCounterThirdClick()
             }
         }
     }
 
-    private fun initPresenter() {
-        presenter = CountersPresenter(this, CountersModel())
+    override fun setCounterOneText(counter: String) {
+        binding.mainActivityFirstTextView.text = counter
     }
 
-    override fun setText(id: Int, counter: String) {
-        with(binding) {
+    override fun setCounterTwoText(counter: String) {
+        binding.mainActivitySecondTextView.text = counter
+    }
 
-            when (id) {
-                Constants.DEFAULT_VALUE_ZERO -> {
-                    mainActivityFirstTextView.text = counter
-                }
-                Constants.DEFAULT_VALUE_ONE -> {
-                    mainActivitySecondTextView.text = counter
-                }
-                Constants.DEFAULT_VALUE_TWO -> {
-                    mainActivityThirdTextView.text = counter
-                }
-            }
-        }
+    override fun setCounterThirdText(counter: String) {
+        binding.mainActivityThirdTextView.text = counter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

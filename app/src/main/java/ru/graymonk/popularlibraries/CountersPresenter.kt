@@ -1,30 +1,24 @@
 package ru.graymonk.popularlibraries
 
+import moxy.MvpPresenter
 import ru.graymonk.popularlibraries.utils.Constants
 
-class CountersPresenter(private val view: MainView, private val model: CountersModel) {
+class CountersPresenter(private val model: CountersModel) : MvpPresenter<MainView>() {
 
-
-    fun onCounterClick(id: Int) {
-        when (id) {
-            Constants.DEFAULT_VALUE_ZERO -> {
-                view.setText(
-                    Constants.DEFAULT_VALUE_ZERO,
-                    model.next(Constants.DEFAULT_VALUE_ZERO).toString()
-                )
-            }
-            Constants.DEFAULT_VALUE_ONE -> {
-                view.setText(
-                    Constants.DEFAULT_VALUE_ONE,
-                    model.next(Constants.DEFAULT_VALUE_ONE).toString()
-                )
-            }
-            Constants.DEFAULT_VALUE_TWO -> {
-                view.setText(
-                    Constants.DEFAULT_VALUE_TWO,
-                    model.next(Constants.DEFAULT_VALUE_TWO).toString()
-                )
-            }
-        }
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
     }
+
+    fun onCounterOneClick() {
+        viewState.setCounterOneText(model.next(Constants.DEFAULT_VALUE_ZERO).toString())
+    }
+
+    fun onCounterTwoClick() {
+        viewState.setCounterTwoText(model.next(Constants.DEFAULT_VALUE_ONE).toString())
+    }
+
+    fun onCounterThirdClick() {
+        viewState.setCounterThirdText(model.next(Constants.DEFAULT_VALUE_TWO).toString())
+    }
+
 }
