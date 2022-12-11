@@ -3,12 +3,11 @@ package ru.graymonk.popularlibraries
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
+import ru.graymonk.popularlibraries.model.GithubUser
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : MvpView {
-    fun setCounterOneText(counter: String)
+    fun initList(list: List<GithubUser>)
 
-    fun setCounterTwoText(counter: String)
-
-    fun setCounterThirdText(counter: String)
+    //fun updateList(list: List<GitHubUser>)
 }

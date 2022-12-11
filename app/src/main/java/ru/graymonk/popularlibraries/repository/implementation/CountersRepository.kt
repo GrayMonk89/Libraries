@@ -1,6 +1,6 @@
-package ru.graymonk.popularlibraries
+package ru.graymonk.popularlibraries.repository.implementation
 
-class CountersModel {
+class CountersRepository {
     private val counter = mutableListOf(0, 0, 0)
 
     fun getCounter(position: Int): Int {

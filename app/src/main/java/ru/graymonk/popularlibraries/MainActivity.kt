@@ -3,9 +3,13 @@ package ru.graymonk.popularlibraries
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.graymonk.popularlibraries.databinding.ActivityMainBinding
+import ru.graymonk.popularlibraries.main.UserAdapter
+import ru.graymonk.popularlibraries.model.GithubUser
+import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
 import kotlin.system.exitProcess
 
 
@@ -13,41 +17,26 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val presenter by moxyPresenter { CountersPresenter(CountersModel()) }
+    private val adapter = UserAdapter()
+
+    private val presenter by moxyPresenter { CountersPresenter(GithubRepositoryImpl()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setClickListener()
+        initRecyclerView()
+
     }
 
-    private fun setClickListener() {
+    private fun initRecyclerView() {
         with(binding) {
-            mainActivityFirstButton.setOnClickListener {
-                presenter.onCounterOneClick()
-            }
-            mainActivitySecondButton.setOnClickListener {
-                presenter.onCounterTwoClick()
-            }
-            mainActivityThirdButton.setOnClickListener {
-                presenter.onCounterThirdClick()
-            }
+            rvGithubUsers.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvGithubUsers.adapter = adapter
         }
     }
 
-    override fun setCounterOneText(counter: String) {
-        binding.mainActivityFirstTextView.text = counter
-    }
-
-    override fun setCounterTwoText(counter: String) {
-        binding.mainActivitySecondTextView.text = counter
-    }
-
-    override fun setCounterThirdText(counter: String) {
-        binding.mainActivityThirdTextView.text = counter
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -61,5 +50,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun initList(list: List<GithubUser>) {
+        adapter.users = list
     }
 }
