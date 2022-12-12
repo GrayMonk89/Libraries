@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.graymonk.popularlibraries.R
 import ru.graymonk.popularlibraries.model.GithubUser
+import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
 
-class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
+class UserAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
 
     var users: List<GithubUser> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -17,6 +19,7 @@ class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
         return GithubUserViewHolder(view)
@@ -27,12 +30,14 @@ class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
     }
 
     override fun getItemCount(): Int = users.size
-}
 
-class GithubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.textViewUserLogin) }
+    inner class GithubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.textViewUserLogin) }
 
-    fun bind(item: GithubUser) = with(item) {
-        tvLogin.text = login
+        fun bind(item: GithubUser) = with(item) {
+            tvLogin.text = login
+            itemView.setOnClickListener { onItemClickListener.onItemClick(item) }
+        }
     }
 }
+

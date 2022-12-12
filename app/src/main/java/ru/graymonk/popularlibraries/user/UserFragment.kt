@@ -13,8 +13,9 @@ import ru.graymonk.popularlibraries.databinding.FragmentUserListBinding
 import ru.graymonk.popularlibraries.main.UserAdapter
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
+import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
 
-class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
+class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, OnItemClickListener {
     companion object {
         fun getInstance(): UserFragment {
             return UserFragment()
@@ -25,7 +26,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
     private val binding: FragmentUserListBinding
         get() = _binding!!
 
-    private val adapter = UserAdapter()
+    private val adapter = UserAdapter(this)
 
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(GithubRepositoryImpl(), PopApp.instance.router )
@@ -58,4 +59,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
     }
 
     override fun onBackPressed(): Boolean = presenter.onBackPressed()
+
+    override fun onItemClick(gitHubUser: GithubUser) {
+        presenter.showDetails(gitHubUser)
+    }
 }

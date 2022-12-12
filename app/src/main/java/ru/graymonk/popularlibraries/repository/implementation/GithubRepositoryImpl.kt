@@ -10,7 +10,14 @@ class GithubRepositoryImpl : GithubRepository {
             GithubUser("Sara"),
             GithubUser("Hudson"),
             GithubUser("Aang"),
-            GithubUser("Kung Fury"))
+            GithubUser("Kung Fury"),
+            GithubUser("Ellen Ripley"),
+            GithubUser("Sarah Conor"),
+            GithubUser("Dwayne Hicks"),
+            GithubUser("John McClane"),
+            GithubUser("Alan Schaefer"),
+            GithubUser("Tyler Durden"))
+
 
     override fun getUsers(): List<GithubUser>{
         return repository
