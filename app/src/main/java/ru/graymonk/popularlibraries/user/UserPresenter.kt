@@ -1,6 +1,7 @@
 package ru.graymonk.popularlibraries.user
 
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpPresenter
 import ru.graymonk.popularlibraries.core.navigation.UserDetailsScreen
 import ru.graymonk.popularlibraries.model.GithubUser
@@ -13,6 +14,7 @@ class UserPresenter(private val repository: GithubRepository, private val router
         super.onFirstViewAttach()
         viewState.showLoading()
         repository.getUsers()
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     viewState.initList(it)

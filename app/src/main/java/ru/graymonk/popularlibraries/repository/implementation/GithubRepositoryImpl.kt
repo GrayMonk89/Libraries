@@ -3,6 +3,7 @@ package ru.graymonk.popularlibraries.repository.implementation
 import io.reactivex.rxjava3.core.Single
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.GithubRepository
+import java.util.concurrent.TimeUnit
 
 class GithubRepositoryImpl : GithubRepository {
     private val repository =
@@ -21,8 +22,9 @@ class GithubRepositoryImpl : GithubRepository {
 
 
     override fun getUsers(): Single<List<GithubUser>> {
-        return Single.create {
-            it.onSuccess(repository)
-        }
+        return Single.just(repository).delay(5L, TimeUnit.SECONDS)
+//        return Single.create {
+//            it.onSuccess(repository)
+//        }
     }
 }

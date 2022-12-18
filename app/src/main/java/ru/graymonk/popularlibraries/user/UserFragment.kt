@@ -59,10 +59,11 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     }
 
     override fun showLoading() {
-
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
     }
 
     override fun onBackPressed(): Boolean = presenter.onBackPressed()
