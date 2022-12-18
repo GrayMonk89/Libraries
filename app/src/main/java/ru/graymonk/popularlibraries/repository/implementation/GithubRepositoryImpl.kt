@@ -1,5 +1,6 @@
 package ru.graymonk.popularlibraries.repository.implementation
 
+import io.reactivex.rxjava3.core.Single
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.GithubRepository
 
@@ -19,7 +20,9 @@ class GithubRepositoryImpl : GithubRepository {
             GithubUser("Tyler Durden"))
 
 
-    override fun getUsers(): List<GithubUser>{
-        return repository
+    override fun getUsers(): Single<List<GithubUser>> {
+        return Single.create {
+            it.onSuccess(repository)
+        }
     }
 }

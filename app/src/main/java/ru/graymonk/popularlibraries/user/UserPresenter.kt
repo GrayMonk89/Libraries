@@ -11,7 +11,15 @@ class UserPresenter(private val repository: GithubRepository, private val router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.initList(repository.getUsers())
+        viewState.showLoading()
+        repository.getUsers()
+            .subscribe(
+                {
+                    viewState.initList(it)
+                    viewState.hideLoading()
+                },
+                {}
+            )
     }
 
     fun onBackPressed(): Boolean {
