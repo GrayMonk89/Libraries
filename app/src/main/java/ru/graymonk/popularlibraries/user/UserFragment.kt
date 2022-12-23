@@ -10,7 +10,6 @@ import moxy.ktx.moxyPresenter
 import ru.graymonk.popularlibraries.PopApp
 import ru.graymonk.popularlibraries.core.OnBackPressedListener
 import ru.graymonk.popularlibraries.databinding.FragmentUserListBinding
-import ru.graymonk.popularlibraries.main.UserAdapter
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
 import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
@@ -43,7 +42,16 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        initAdapter()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.buttonConverter.setOnClickListener {  }
+    }
+
+    private fun initAdapter() {
+        with(binding) {
             rvGithubUsers.layoutManager = LinearLayoutManager(requireContext())
             rvGithubUsers.adapter = adapter
         }
