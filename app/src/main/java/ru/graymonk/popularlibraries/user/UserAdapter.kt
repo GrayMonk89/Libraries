@@ -1,4 +1,4 @@
-package ru.graymonk.popularlibraries.main
+package ru.graymonk.popularlibraries.user
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

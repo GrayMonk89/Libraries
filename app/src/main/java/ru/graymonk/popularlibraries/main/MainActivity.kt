@@ -53,6 +53,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         return super.onOptionsItemSelected(item)
     }
 
+
     override fun onBackPressed() {
         supportFragmentManager.fragments.forEach { currentFragment ->
             if (currentFragment is OnBackPressedListener && currentFragment.onBackPressed()) {
