@@ -47,6 +47,12 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
             rvGithubUsers.layoutManager = LinearLayoutManager(requireContext())
             rvGithubUsers.adapter = adapter
         }
+
+        convertTo()
+    }
+
+    private fun convertTo() {
+        binding.fabImageConverter.setOnClickListener(){presenter.showImageConverter()}
     }
 
     override fun onDestroy() {

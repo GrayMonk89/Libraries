@@ -3,6 +3,7 @@ package ru.graymonk.popularlibraries.user
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpPresenter
+import ru.graymonk.popularlibraries.core.navigation.ImageConverterScreen
 import ru.graymonk.popularlibraries.core.navigation.UserDetailsScreen
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.GithubRepository
@@ -29,8 +30,12 @@ class UserPresenter(private val repository: GithubRepository, private val router
         return true
     }
 
-    fun showDetails(githubUser: GithubUser?){
+    fun showDetails(githubUser: GithubUser?) {
         val login = githubUser ?: GithubUser("empty")
         router.navigateTo(UserDetailsScreen(login))
+    }
+
+    fun showImageConverter() {
+        router.navigateTo(ImageConverterScreen())
     }
 }
