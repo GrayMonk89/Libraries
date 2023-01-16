@@ -31,7 +31,7 @@ class UserPresenter(private val repository: GithubRepository, private val router
     }
 
     fun showDetails(githubUser: GithubUser?) {
-        val login = githubUser ?: GithubUser("empty")
+        val login = githubUser ?: GithubUser(-1,"empty","")
         router.navigateTo(UserDetailsScreen(login))
     }
 

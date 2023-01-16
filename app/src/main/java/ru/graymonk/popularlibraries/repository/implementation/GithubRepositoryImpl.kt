@@ -8,17 +8,17 @@ import java.util.concurrent.TimeUnit
 class GithubRepositoryImpl : GithubRepository {
     private val repository =
         listOf(
-            GithubUser("John"),
-            GithubUser("Sara"),
-            GithubUser("Hudson"),
-            GithubUser("Aang"),
-            GithubUser("Kung Fury"),
-            GithubUser("Ellen Ripley"),
-            GithubUser("Sarah Conor"),
-            GithubUser("Dwayne Hicks"),
-            GithubUser("John McClane"),
-            GithubUser("Alan Schaefer"),
-            GithubUser("Tyler Durden"))
+            GithubUser(1,"John",""),
+            GithubUser(2,"Sara",""),
+            GithubUser(3,"Hudson",""),
+            GithubUser(4,"Aang",""),
+            GithubUser(5,"Kung Fury",""),
+            GithubUser(6,"Ellen Ripley",""),
+            GithubUser(7,"Sarah Conor",""),
+            GithubUser(8,"Dwayne Hicks",""),
+            GithubUser(9,"John McClane",""),
+            GithubUser(10,"Alan Schaefer",""),
+            GithubUser(11,"Tyler Durden",""))
 
 
     override fun getUsers(): Single<List<GithubUser>> {

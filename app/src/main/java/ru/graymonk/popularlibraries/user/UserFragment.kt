@@ -47,7 +47,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     }
 
     private fun setClickListener() {
-        binding.buttonConverter.setOnClickListener {  }
+        binding.fabImageConverter.setOnClickListener {  }
     }
 
     private fun initAdapter() {
