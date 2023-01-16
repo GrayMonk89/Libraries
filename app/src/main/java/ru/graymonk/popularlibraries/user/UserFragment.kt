@@ -11,7 +11,9 @@ import ru.graymonk.popularlibraries.PopApp
 import ru.graymonk.popularlibraries.core.OnBackPressedListener
 import ru.graymonk.popularlibraries.databinding.FragmentUserListBinding
 import ru.graymonk.popularlibraries.model.GithubUser
+import ru.graymonk.popularlibraries.network.NetworkProvider
 import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
+
 import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
 
 class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, OnItemClickListener {
@@ -28,7 +30,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     private val adapter = UserAdapter(this)
 
     private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(GithubRepositoryImpl(), PopApp.instance.router )
+        UserPresenter(GithubRepositoryImpl(NetworkProvider.usersApi), PopApp.instance.router)
     }
 
     override fun onCreateView(
@@ -47,7 +49,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     }
 
     private fun setClickListener() {
-        binding.fabImageConverter.setOnClickListener {  }
+        binding.fabImageConverter.setOnClickListener { }
     }
 
     private fun initAdapter() {
@@ -60,7 +62,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     }
 
     private fun convertTo() {
-        binding.fabImageConverter.setOnClickListener(){presenter.showImageConverter()}
+        binding.fabImageConverter.setOnClickListener() { presenter.showImageConverter() }
     }
 
     override fun onDestroy() {

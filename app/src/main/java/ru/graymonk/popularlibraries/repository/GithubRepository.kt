@@ -5,4 +5,6 @@ import ru.graymonk.popularlibraries.model.GithubUser
 
 interface GithubRepository {
     fun getUsers(): Single<List<GithubUser>>
+
+    fun getUserByLogin(login: String): Single<GithubUser>
 }
