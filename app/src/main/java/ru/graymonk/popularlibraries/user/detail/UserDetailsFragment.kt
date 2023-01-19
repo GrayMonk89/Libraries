@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.graymonk.popularlibraries.PopApp
 import ru.graymonk.popularlibraries.core.OnBackPressedListener
 import ru.graymonk.popularlibraries.databinding.FragmentUserDetailsBinding
 import ru.graymonk.popularlibraries.model.GithubUser
+import ru.graymonk.popularlibraries.network.NetworkProvider
+import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
+import ru.graymonk.popularlibraries.utils.Constants
+import ru.graymonk.popularlibraries.utils.makeGone
+import ru.graymonk.popularlibraries.utils.makeVisible
 
 class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserDetailsView {
 
@@ -18,7 +24,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
         get() = _binding!!
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
-        UserDetailsPresenter(PopApp.instance.router)
+        UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi),  PopApp.instance.router)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +41,18 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        renderUserDetail(arguments?.getParcelable<GithubUser>("test"))
-    }
-
-    private fun renderUserDetail(githubUser: GithubUser?) {
-        githubUser?.let {
-            binding.tvDetailsUserLogin.text = githubUser.login
+        arguments?.getString(Constants.CONST_ARGUMENT_LOGIN)?.let {
+            presenter.loadUser(it)
         }
+
     }
+
 
     companion object {
         @JvmStatic
         fun newInstance(gitHubUser: GithubUser) = UserDetailsFragment().apply {
             arguments = Bundle().apply {
-                putParcelable("test", gitHubUser)
+                putString(Constants.CONST_ARGUMENT_LOGIN, gitHubUser.login)
             }
         }
     }
@@ -59,6 +62,35 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    override fun show(user: GithubUser) {
+        user.let {
+            binding.textViewDetailsUserLogin.text = user.login
+            binding.imageViewDetailsUserAvatar.load(user.avatarUrl)
+            binding.textViewDetailsUserId.text = user.id.toString()
+        }
+    }
+
+    override fun showLoading() {
+        with(binding)
+        {
+            imageViewDetailsUserAvatar.makeGone()
+            textViewDetailsUserId.makeGone()
+            textViewDetailsUserLogin.makeGone()
+            progressBar.makeVisible()
+        }
+
+    }
+
+    override fun hideLoading() {
+        with(binding)
+        {
+            imageViewDetailsUserAvatar.makeVisible()
+            textViewDetailsUserId.makeVisible()
+            textViewDetailsUserLogin.makeVisible()
+            progressBar.makeGone()
+        }
     }
 
 }

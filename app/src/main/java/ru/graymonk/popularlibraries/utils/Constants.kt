@@ -6,4 +6,6 @@ object Constants {
     const val DEFAULT_VALUE_TWO = 2
 
     const val CONST_SEVER_URL = "https://api.github.com/"
+
+    const val CONST_ARGUMENT_LOGIN = "CONST_ARGUMENT_LOGIN"
 }

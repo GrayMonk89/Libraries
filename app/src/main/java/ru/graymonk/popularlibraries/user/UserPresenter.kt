@@ -1,16 +1,17 @@
 package ru.graymonk.popularlibraries.user
 
+import android.annotation.SuppressLint
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpPresenter
-import ru.graymonk.popularlibraries.core.navigation.ImageConverterScreen
-import ru.graymonk.popularlibraries.core.navigation.UserDetailsScreen
+import ru.graymonk.popularlibraries.core.navigation.Screens
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.GithubRepository
 
 class UserPresenter(private val repository: GithubRepository, private val router: Router) :
     MvpPresenter<UserView>() {
 
+    @SuppressLint("CheckResult")
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.showLoading()
@@ -32,10 +33,10 @@ class UserPresenter(private val repository: GithubRepository, private val router
 
     fun showDetails(githubUser: GithubUser?) {
         val login = githubUser ?: GithubUser(0,"empty","")
-        router.navigateTo(UserDetailsScreen(login))
+        router.navigateTo(Screens.UserDetailsScreen(login))
     }
 
     fun showImageConverter() {
-        router.navigateTo(ImageConverterScreen())
+        router.navigateTo(Screens.ImageConverterScreen())
     }
 }

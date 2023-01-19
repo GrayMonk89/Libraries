@@ -9,14 +9,14 @@ import ru.graymonk.popularlibraries.utils.Constants
 
 object NetworkProvider {
 
-    val usersApi by lazy { createRetrofit().create(UsersApi::class.java) }
+    val usersApi: UsersApi by lazy { createRetrofit().create(UsersApi::class.java) }
 
     private fun createGson() = GsonBuilder()
         .excludeFieldsWithoutExposeAnnotation()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create()
 
-    fun createRetrofit() = Retrofit.Builder()
+    private fun createRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(Constants.CONST_SEVER_URL)
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
