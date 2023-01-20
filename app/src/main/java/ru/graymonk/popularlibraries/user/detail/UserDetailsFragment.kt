@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.graymonk.popularlibraries.PopApp
 import ru.graymonk.popularlibraries.core.OnBackPressedListener
 import ru.graymonk.popularlibraries.databinding.FragmentUserDetailsBinding
+import ru.graymonk.popularlibraries.model.GithubRepository
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.network.NetworkProvider
 import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
@@ -17,14 +19,18 @@ import ru.graymonk.popularlibraries.utils.Constants
 import ru.graymonk.popularlibraries.utils.makeGone
 import ru.graymonk.popularlibraries.utils.makeVisible
 
-class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserDetailsView {
+class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserDetailsView,
+    OnItemClickListener {
 
     private var _binding: FragmentUserDetailsBinding? = null
     private val binding: FragmentUserDetailsBinding
         get() = _binding!!
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
-        UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi),  PopApp.instance.router)
+        UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi), PopApp.instance.router)
+    }
+    private val adapter = RepositoryAdapter {
+        presenter.onRepositoryClicked()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +50,15 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
         arguments?.getString(Constants.CONST_ARGUMENT_LOGIN)?.let {
             presenter.loadUser(it)
         }
+        initAdapter()
 
+    }
+
+    private fun initAdapter() {
+        with(binding) {
+            recyclerViewRepository.layoutManager = LinearLayoutManager(requireContext())
+            recyclerViewRepository.adapter = adapter
+        }
     }
 
 
@@ -64,11 +78,15 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
         super.onDestroy()
     }
 
-    override fun show(user: GithubUser) {
+    override fun show(user: GithubUser, repository: List<GithubRepository>) {
         user.let {
-            binding.textViewDetailsUserLogin.text = user.login
-            binding.imageViewDetailsUserAvatar.load(user.avatarUrl)
-            binding.textViewDetailsUserId.text = user.id.toString()
+
+        }
+        binding.apply {
+            textViewDetailsUserLogin.text = user.login
+            imageViewDetailsUserAvatar.load(user.avatarUrl)
+            textViewDetailsUserId.text = user.id.toString()
+            adapter.repository = repository
         }
     }
 
@@ -91,6 +109,10 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
             textViewDetailsUserLogin.makeVisible()
             progressBar.makeGone()
         }
+    }
+
+    override fun onItemClick(gitHubUser: GithubUser) {
+
     }
 
 }

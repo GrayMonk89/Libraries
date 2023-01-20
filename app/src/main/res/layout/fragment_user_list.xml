@@ -9,7 +9,7 @@
     tools:context=".main.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvGithubUsers"
+        android:id="@+id/recyclerViewGithubUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_user"/>

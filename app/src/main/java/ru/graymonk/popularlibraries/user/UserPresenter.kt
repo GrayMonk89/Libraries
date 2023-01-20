@@ -6,9 +6,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpPresenter
 import ru.graymonk.popularlibraries.core.navigation.Screens
 import ru.graymonk.popularlibraries.model.GithubUser
-import ru.graymonk.popularlibraries.repository.GithubRepository
+import ru.graymonk.popularlibraries.repository.IGithubRepository
 
-class UserPresenter(private val repository: GithubRepository, private val router: Router) :
+class UserPresenter(private val repository: IGithubRepository, private val router: Router) :
     MvpPresenter<UserView>() {
 
     @SuppressLint("CheckResult")

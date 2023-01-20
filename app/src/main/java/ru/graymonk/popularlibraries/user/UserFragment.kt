@@ -45,6 +45,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        convertTo()
         setClickListener()
     }
 
@@ -54,11 +55,9 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
 
     private fun initAdapter() {
         with(binding) {
-            rvGithubUsers.layoutManager = LinearLayoutManager(requireContext())
-            rvGithubUsers.adapter = adapter
+            recyclerViewGithubUsers.layoutManager = LinearLayoutManager(requireContext())
+            recyclerViewGithubUsers.adapter = adapter
         }
-
-        convertTo()
     }
 
     private fun convertTo() {

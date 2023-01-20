@@ -20,7 +20,7 @@ class UserAdapter(private val onItemClickListener: OnItemClickListener) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
-        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GithubUserViewHolder(binding)
     }
 
