@@ -1,4 +1,4 @@
-package ru.graymonk.popularlibraries.user.detail
+package ru.graymonk.popularlibraries.user
 
 import ru.graymonk.popularlibraries.model.GithubUser
 

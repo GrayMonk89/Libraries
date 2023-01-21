@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ru.graymonk.popularlibraries.databinding.ItemUserBinding
 import ru.graymonk.popularlibraries.model.GithubUser
-import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
 
 class UserAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {

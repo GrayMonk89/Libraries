@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.graymonk.popularlibraries.databinding.ItemRepositoryBinding
 import ru.graymonk.popularlibraries.model.GithubRepository
 
-typealias OnRepoClickListener = (id: Long) -> Unit
+typealias OnRepoClickListener = (repository: GithubRepository) -> Unit
 
 class RepositoryAdapter(private val onRepoClickListener: OnRepoClickListener) :
     RecyclerView.Adapter<RepositoryAdapter.GithubUserRepositoryViewHolder>() {
@@ -40,7 +40,7 @@ class RepositoryAdapter(private val onRepoClickListener: OnRepoClickListener) :
         fun bind(item: GithubRepository) = with(binding) {
             textViewName.text = item.name
             root.setOnClickListener {
-                onRepoClickListener.invoke(item.id)
+                onRepoClickListener.invoke(item)
             }
         }
     }

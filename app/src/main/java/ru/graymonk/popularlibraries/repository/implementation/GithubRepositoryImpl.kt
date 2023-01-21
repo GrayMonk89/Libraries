@@ -3,8 +3,8 @@ package ru.graymonk.popularlibraries.repository.implementation
 import io.reactivex.rxjava3.core.Single
 import ru.graymonk.popularlibraries.core.mapper.RepositoryMapper
 import ru.graymonk.popularlibraries.core.mapper.UserMapper
-import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.model.GithubRepository
+import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.network.UsersApi
 import ru.graymonk.popularlibraries.repository.IGithubRepository
 

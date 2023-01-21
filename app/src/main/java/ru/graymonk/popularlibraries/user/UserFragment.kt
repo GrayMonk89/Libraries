@@ -14,8 +14,6 @@ import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.network.NetworkProvider
 import ru.graymonk.popularlibraries.repository.implementation.GithubRepositoryImpl
 
-import ru.graymonk.popularlibraries.user.detail.OnItemClickListener
-
 class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, OnItemClickListener {
     companion object {
         fun getInstance(): UserFragment {

@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
+import ru.graymonk.popularlibraries.core.navigation.Screens
 import ru.graymonk.popularlibraries.model.GithubRepository
 import ru.graymonk.popularlibraries.model.GithubUser
 import ru.graymonk.popularlibraries.repository.IGithubRepository
@@ -14,16 +15,6 @@ class UserDetailsPresenter(
     private val repository: IGithubRepository,
     private val router: Router
 ) : MvpPresenter<UserDetailsView>() {
-//    override fun onFirstViewAttach() {
-//        super.onFirstViewAttach()
-//        viewState.showLoading()
-//        repository.getUsers().observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                viewState.show(it)
-//                viewState.hideLoading()
-//            }, {})
-//    }
-
     private val bag = CompositeDisposable()
 
     fun loadUser(login: String) {
@@ -44,7 +35,9 @@ class UserDetailsPresenter(
             ).disposeBy(bag)
     }
 
-    fun onRepositoryClicked(){}
+    fun onRepositoryClicked(githubRepository: GithubRepository){
+        router.navigateTo(Screens.RepositoryDetailScreen(githubRepository))
+    }
 
     fun onBackPressed(): Boolean {
         router.exit()

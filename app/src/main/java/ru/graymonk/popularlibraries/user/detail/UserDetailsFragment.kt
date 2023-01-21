@@ -19,8 +19,7 @@ import ru.graymonk.popularlibraries.utils.Constants
 import ru.graymonk.popularlibraries.utils.makeGone
 import ru.graymonk.popularlibraries.utils.makeVisible
 
-class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserDetailsView,
-    OnItemClickListener {
+class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserDetailsView {
 
     private var _binding: FragmentUserDetailsBinding? = null
     private val binding: FragmentUserDetailsBinding
@@ -30,11 +29,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
         UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi), PopApp.instance.router)
     }
     private val adapter = RepositoryAdapter {
-        presenter.onRepositoryClicked()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        presenter.onRepositoryClicked(it)
     }
 
     override fun onCreateView(
@@ -110,9 +105,4 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
             progressBar.makeGone()
         }
     }
-
-    override fun onItemClick(gitHubUser: GithubUser) {
-
-    }
-
 }

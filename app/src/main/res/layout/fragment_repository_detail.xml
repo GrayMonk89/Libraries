@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".user.detail.repositorydetail.RepositoryDetailFragment">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/id" />
+
+        <TextView
+            android:id="@+id/textViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/id" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/tittle" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/tittle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/fork_count" />
+
+        <TextView
+            android:id="@+id/textViewForksCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:padding="@dimen/five_dp"
+            android:text="@string/fork_count" />
+    </LinearLayout>
+
+
+</LinearLayout>
