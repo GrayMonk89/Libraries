@@ -1,7 +1,7 @@
 package ru.graymonk.popularlibraries.core.mapper
 
 import ru.graymonk.popularlibraries.model.GithubRepository
-import ru.graymonk.popularlibraries.network.RepositoryDto
+import ru.graymonk.popularlibraries.core.network.RepositoryDto
 
 object RepositoryMapper {
     fun map(repositoryDto: RepositoryDto): GithubRepository {

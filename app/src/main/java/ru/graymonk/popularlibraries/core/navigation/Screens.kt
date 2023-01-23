@@ -3,12 +3,12 @@ package ru.graymonk.popularlibraries.core.navigation
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import ru.graymonk.popularlibraries.imageconverter.ImageConverterFragment
+import ru.graymonk.popularlibraries.feature.imageconverter.ImageConverterFragment
 import ru.graymonk.popularlibraries.model.GithubRepository
 import ru.graymonk.popularlibraries.model.GithubUser
-import ru.graymonk.popularlibraries.user.UserFragment
-import ru.graymonk.popularlibraries.user.detail.UserDetailsFragment
-import ru.graymonk.popularlibraries.user.detail.repositorydetail.RepositoryDetailFragment
+import ru.graymonk.popularlibraries.feature.user.UserFragment
+import ru.graymonk.popularlibraries.feature.user.detail.UserDetailsFragment
+import ru.graymonk.popularlibraries.feature.user.detail.repositorydetail.RepositoryDetailFragment
 
 class Screens {
     object UserScreen: FragmentScreen{

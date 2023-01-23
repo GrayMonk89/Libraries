@@ -1,7 +1,7 @@
 package ru.graymonk.popularlibraries.core.mapper
 
 import ru.graymonk.popularlibraries.model.GithubUser
-import ru.graymonk.popularlibraries.network.UserDto
+import ru.graymonk.popularlibraries.core.network.UserDto
 
 object UserMapper {
     fun mapToEntity(userDto: UserDto): GithubUser {
