@@ -1,8 +1,10 @@
 package ru.graymonk.popularlibraries.feature.user
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.graymonk.popularlibraries.core.navigation.Screens
 import ru.graymonk.popularlibraries.model.GithubUser
@@ -16,13 +18,16 @@ class UserPresenter(private val repository: IGithubRepository, private val route
         super.onFirstViewAttach()
         viewState.showLoading()
         repository.getUsers()
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     viewState.initList(it)
                     viewState.hideLoading()
                 },
-                {}
+                {
+                    Log.e("USER_LIST", it.message ?: "!!!")
+                }
             )
     }
 

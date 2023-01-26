@@ -17,7 +17,7 @@ object NetworkProvider {
         .create()
 
     private fun createRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl(Constants.CONST_SEVER_URL)
+        .baseUrl(Constants.DataBase.CONST_SEVER_URL)
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

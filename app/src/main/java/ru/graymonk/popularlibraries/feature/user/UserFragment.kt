@@ -28,7 +28,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener, On
     private val adapter = UserAdapter(this)
 
     private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(GithubRepositoryImpl(NetworkProvider.usersApi), PopApp.instance.router)
+        UserPresenter(GithubRepositoryImpl(NetworkProvider.usersApi,PopApp.instance.dataBase.userDao(),PopApp.instance.getConnectiveObservableSingle()), PopApp.instance.router)
     }
 
     override fun onCreateView(

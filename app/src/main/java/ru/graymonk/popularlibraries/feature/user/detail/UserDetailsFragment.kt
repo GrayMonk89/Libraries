@@ -26,7 +26,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), OnBackPressedListener, UserD
         get() = _binding!!
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
-        UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi), PopApp.instance.router)
+        UserDetailsPresenter(GithubRepositoryImpl(NetworkProvider.usersApi,PopApp.instance.dataBase.userDao(),PopApp.instance.getConnectiveObservableSingle()), PopApp.instance.router)
     }
     private val adapter = RepositoryAdapter {
         presenter.onRepositoryClicked(it)
